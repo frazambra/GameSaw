@@ -1,0 +1,187 @@
+/* Reset di base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Font sans-serif per leggibilità a video [cite: 1910] */
+    background-color: #1a1a2e; /* Colore scuro per stile gaming */
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Header & Navigazione --- */
+header {
+    background-color: #16213e;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between; /* Spazia logo a sx e nav a dx */
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e94560; /* Colore accent */
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 2rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ecf0f1;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #e94560;
+}
+
+/* --- Bottoni Auth (In alto a destra) --- */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #e94560;
+    color: #e94560;
+}
+
+.btn-outline:hover {
+    background: #e94560;
+    color: white;
+}
+
+.btn-solid {
+    background: #e94560;
+    border: 2px solid #e94560;
+    color: white;
+}
+
+.btn-solid:hover {
+    background: #c0394d;
+    border-color: #c0394d;
+}
+
+/* --- Contenuto Centrale --- */
+main {
+    flex: 1; /* Occupa lo spazio rimanente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.game-container {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 500px;
+}
+
+.game-title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: #e94560;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Text-shadow CSS3 [cite: 2401] */
+}
+
+/* Area input nickname */
+#user-area {
+    margin-bottom: 1.5rem;
+    height: 50px; /* Altezza fissa per evitare salti di layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 80%;
+    text-align: center;
+}
+
+/* Bottone GIOCA */
+.btn-play {
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #0f3460;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(15, 52, 96, 0.7);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-play:hover {
+    transform: scale(1.05); /* Trasformazione CSS3 [cite: 2536] */
+    box-shadow: 0 0 25px rgba(15, 52, 96, 1);
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+/* --- Media Query per Mobile [cite: 2673] --- */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    nav {
+        flex-direction: column;
+        margin-left: 0;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}

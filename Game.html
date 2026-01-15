@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameSAW - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">GameSAW</div>
+        
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Chi siamo</a></li>
+                <li><a href="#">Cosa facciamo</a></li>
+                <li><a href="#">Dove siamo</a></li>
+                <li><a href="#">Contatti</a></li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button id="btn-login" class="btn btn-outline">Login</button>
+                <button id="btn-register" class="btn btn-solid">Registrati</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="game-container">
+            <h1 class="game-title">GameSAW</h1>
+            
+            <div id="user-area">
+                <input type="text" id="nickname-input" placeholder="Inserisci il tuo Nickname" aria-label="Nickname">
+                
+                <h2 id="user-display" class="hidden">Benvenuto, <span id="display-name"></span></h2>
+            </div>
+
+            <button id="btn-play" class="btn-play">GIOCA</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 GameSAW Project - Università di Genova</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
