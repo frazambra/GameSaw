@@ -89,7 +89,7 @@
 
         } else {
             // Password sbagliata
-            header("Location: login.phpl?error=1");
+            header("Location: login.php?error=1");
             exit();
         }
     } else {

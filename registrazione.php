@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // 3. Controllo Password
     if ($password !== $confirm_password) {
-        die("Errore: Le password non coincidono. <a href='../registrazione.html'>Torna indietro</a>");
+        die("Errore: Le password non coincidono. <a href='registrazione.html'>Torna indietro</a>");
     }
 
     // 4. Controllo Email esistente (Prepared Statement)
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 } else {
     // Accesso diretto bloccato
-    header("Location: ../registrazione.html");
+    header("Location: registrazione.html");
     exit();
 }
 ?>
