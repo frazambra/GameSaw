@@ -317,3 +317,68 @@ footer {
 .profile-dropdown:hover .dropdown-content {
     display: block;
 }
+
+/* --- Aggiunte per Game.php --- */
+
+/* Stile per il messaggio centrale di benvenuto */
+.welcome-center {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: normal;
+    animation: fadeIn 1s ease-in;
+}
+
+/* Stile per l'icona utente (FontAwesome) */
+.profile-icon {
+    cursor: pointer;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Fix per il menu a tendina */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+    padding: 10px; /* Aumenta l'area cliccabile */
+}
+
+/* Mostra tendina all'hover */
+.profile-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%; /* Si apre sotto l'icona */
+    background-color: #16213e;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    z-index: 10;
+    border: 1px solid #e94560;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background-color: #e94560;
+}
+
+/* Animazione semplice */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,33 +1,17 @@
 <?php
 /* ==========================================
-   PARTE 1: LOGICA (PHP)
-   Qui gestiamo i dati prima di creare la pagina
+   LOGICA PHP
    ========================================== */
-
-// 1. Avvio della sessione (sempre la prima cosa!)
 session_start();
 
-// 2. Prepariamo le variabili da usare nell'HTML
-// Creiamo una variabile booleana (Vero/Falso) per capire se l'utente è loggato
-// Questo rende l'HTML molto più leggibile dopo.
 $is_logged_in = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 
-// 3. Prepariamo i dati dell'utente
+// Prepariamo il nome utente se loggato
 if ($is_logged_in) {
-    // Se è loggato, prendiamo il nome dalla sessione
-    // Usiamo htmlspecialchars per sicurezza (evita che caratteri strani rompano l'HTML)
     $nome_utente = htmlspecialchars($_SESSION['user_nome']);
-    $messaggio_benvenuto = "Bentornato, <strong>$nome_utente</strong>";
 } else {
-    // Se è un ospite
-    $nome_utente = ""; // Vuoto
-    $messaggio_benvenuto = "Benvenuto, Ospite";
+    $nome_utente = ""; 
 }
-
-// 4. (Opzionale) Definiamo l'immagine del profilo qui per non sporcare l'HTML
-$immagine_profilo = "https://via.placeholder.com/40"; 
-
-/* FINE PARTE PHP - Ora inizia l'HTML */
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +21,7 @@ $immagine_profilo = "https://via.placeholder.com/40";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameSAW - Home</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -46,24 +30,23 @@ $immagine_profilo = "https://via.placeholder.com/40";
         
         <nav>
             <ul class="nav-links">
-                <li><a href="#">Chi siamo</a></li>
-                <li><a href="#">Cosa facciamo</a></li>
-                <li><a href="#">Dove siamo</a></li>
-                <li><a href="#">Contatti</a></li>
+                <li><a href="info.html">Informazioni & Contatti</a></li>
             </ul>
 
             <?php if ($is_logged_in): ?>
                 
                 <div class="user-menu-container">
-                    <span class="welcome-msg"><?php echo $messaggio_benvenuto; ?></span>
-                    
                     <div class="profile-dropdown">
-                        <div class="profile-icon" id="profile-toggle">
-                            <img src="<?php echo $immagine_profilo; ?>" alt="Profilo">
+                        <div class="profile-icon">
+                            <i class="fa-solid fa-circle-user fa-2x" style="color: #e94560;"></i>
                         </div>
 
                         <div class="dropdown-content">
-                            <a href="#">Area utente</a>
+                            <div style="padding: 10px; color: #aaa; font-size: 12px; text-align: center;">
+                                <?php echo $nome_utente; ?>
+                            </div>
+                            <hr>
+                            <a href="profilo.php">Area utente</a>
                             <a href="#">Modifica profilo</a>
                             <a href="#" style="color: red;">Cancella profilo</a>
                             <hr>
@@ -86,6 +69,13 @@ $immagine_profilo = "https://via.placeholder.com/40";
 
     <main>
         <div class="game-container">
+            
+            <?php if ($is_logged_in): ?>
+                <h2 class="welcome-center">
+                    Bentornato, <span style="color: #e94560;"><?php echo $nome_utente; ?></span>
+                </h2>
+            <?php endif; ?>
+
             <h1 class="game-title">GameSAW</h1>
             
             <div id="user-area">
@@ -93,10 +83,7 @@ $immagine_profilo = "https://via.placeholder.com/40";
                     <input type="text" id="nickname-input" placeholder="Inserisci il tuo Nickname" aria-label="Nickname">
                 <?php endif; ?>
                 
-                <h2 id="user-display" class="<?php echo $is_logged_in ? '' : 'hidden'; ?>">
-                    Pronto a giocare, <span id="display-name"><?php echo $nome_utente; ?></span>?
-                </h2>
-            </div>
+                </div>
 
             <button id="btn-play" class="btn-play-big">GIOCA ORA</button>
         </div>
