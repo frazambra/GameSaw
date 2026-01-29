@@ -1,0 +1,38 @@
+<main>
+    <section class="auth-container">
+        <h1>Crea il tuo Account</h1>
+        <p>Inserisci i tuoi dati per iniziare a giocare.</p>
+
+        <form action="registrazione.php" method="POST" class="auth-form">
+            
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cognome">Cognome:</label>
+                <input type="text" id="cognome" name="cognome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="tuamail@esempio.com">
+            </div>
+
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" id="pwd" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pwd_confirm">Conferma Password:</label>
+                <input type="password" id="pwd_confirm" name="password_confirm" required>
+            </div>
+
+            <button type="submit" class="btn-play">REGISTRATI</button>
+        </form>
+        
+        <p class="auth-footer">Hai gia' un account? <a href="login.html">Accedi qui</a></p>
+    </section>
+</main>

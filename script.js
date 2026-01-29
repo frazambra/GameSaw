@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+
     // Riferimenti agli elementi del DOM
     const loginBtn = document.getElementById('btn-login');
     const registerBtn = document.getElementById('btn-register');
@@ -8,40 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const userDisplay = document.getElementById('user-display');
     const displayNameSpan = document.getElementById('display-name');
 
-    // Funzione simulata per gestire il Login/Registrazione
-    function simulateUserLogin() {
-        // Simuliamo che l'utente inserisca i dati in un prompt per questo esempio
-        const user = prompt("Simulazione: Inserisci il tuo nome utente per il login:");
-        
-        if (user && user.trim() !== "") {
-            // Nascondi l'input
-            nicknameInput.classList.add('hidden');
-            
-            // Imposta il nome nello span
-            displayNameSpan.textContent = user;
-            
-            // Mostra il messaggio di benvenuto
-            userDisplay.classList.remove('hidden');
-            
-            // Opzionale: Cambia i bottoni in alto in "Logout"
-            loginBtn.textContent = "Logout";
-            registerBtn.style.display = "none";
-        }
+   // Gestione click sul bottone LOGIN
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            // Reindirizza alla pagina login.html
+            window.location.href = 'login.php';
+        });
     }
 
-    // Event Listeners sui bottoni Auth
-    loginBtn.addEventListener('click', () => {
-        if (loginBtn.textContent === "Logout") {
-            // Reset simulato
-            window.location.reload();
-        } else {
-            simulateUserLogin();
-        }
-    });
-
-    registerBtn.addEventListener('click', () => {
-        simulateUserLogin();
-    });
+    // Gestione click sul bottone REGISTRATI
+    if (registerBtn) {
+        registerBtn.addEventListener('click', () => {
+            // Reindirizza alla pagina registrazione.html
+            window.location.href = 'registrazione.html';
+        });
+    }
 
     // Event Listener sul bottone Gioca
     playBtn.addEventListener('click', () => {
