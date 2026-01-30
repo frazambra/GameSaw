@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accedi - GameSAW</title>
+    <title>Accedi - AimTrainer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <div class="logo">GameSAW</div>
+        <div class="logo">AimTrainer</div>
         <nav>
             <ul class="nav-links">
-                <li><a href="Game.html">Torna alla Home</a></li>
+                <li><a href="Game.php">Torna alla Home</a></li>
             </ul>
         </nav>
     </header>
@@ -41,9 +41,6 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Progetto SAW</p>
-    </footer>
 
     <script src="script.js"></script>
 

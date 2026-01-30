@@ -19,18 +19,19 @@ if ($is_logged_in) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameSAW - Home</title>
+    <title>AimTrainer - Home</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <header>
-        <div class="logo">GameSAW</div>
+        <div class="logo">AimTrainer</div>
         
         <nav>
             <ul class="nav-links">
                 <li><a href="info.html">Informazioni & Contatti</a></li>
+                <li><a href="classifica.php">🏆 Classifica</a></li>
             </ul>
 
             <?php if ($is_logged_in): ?>
@@ -46,8 +47,7 @@ if ($is_logged_in) {
                                 <?php echo $nome_utente; ?>
                             </div>
                             <hr>
-                            <a href="profilo.php">Area utente</a>
-                            <a href="#">Modifica profilo</a>
+                            <a href="visualizza_profilo.php">Area utente</a>
                             <a href="#" style="color: red;">Cancella profilo</a>
                             <hr>
                             <a href="logout.php">Logout</a>
@@ -76,7 +76,7 @@ if ($is_logged_in) {
                 </h2>
             <?php endif; ?>
 
-            <h1 class="game-title">GameSAW</h1>
+            <h1 class="game-title">AimTrainer</h1>
             
             <div id="user-area">
                 <?php if (!$is_logged_in): ?>
@@ -85,13 +85,9 @@ if ($is_logged_in) {
                 
                 </div>
 
-            <button id="btn-play" class="btn-play-big">GIOCA ORA</button>
+            <button id="btn-play" class="btn-play">GIOCA ORA</button>
         </div>
     </main>
-
-    <footer>
-        <p>&copy; 2023 GameSAW - Tutti i diritti riservati</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>

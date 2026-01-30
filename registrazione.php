@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->execute()) {
         // SUCCESSO
         // Rimandiamo al Login con un messaggio di conferma
-        header("Location: Game.html?utente=". urlencode($nome));
+        header("Location: login.php?registered=1");
         exit();
     } else {
         echo "Errore durante la registrazione: " . $stmt->error;

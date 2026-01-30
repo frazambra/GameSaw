@@ -1,38 +1,186 @@
-<main>
-    <section class="auth-container">
-        <h1>Crea il tuo Account</h1>
-        <p>Inserisci i tuoi dati per iniziare a giocare.</p>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione - AimTrainer</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* STILI SPECIFICI COPIATI DA PROFILO.PHP 
+           Per mantenere l'uniformità visiva richiesta 
+        */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            background-color: #1a1a2e; /* Assicuro il background corretto */
+        }
 
-        <form action="registrazione.php" method="POST" class="auth-form">
+        .edit-container {
+            background-color: #16213e; /* Sfondo scuro del box */
+            width: 100%;
+            max-width: 500px; /* Larghezza massima contenuta */
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #e94560;
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-transform: uppercase;
+            width: 100%;
+            border-bottom: 1px solid #1a1a2e;
+            padding-bottom: 15px;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            gap: 20px;
+        }
+
+        .form-group {
+            width: 100%;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #e94560;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-align: center; /* Etichette centrate come in profilo.php */
+        }
+
+        /* Stile input specifico per il look "profilo" */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #1a1a2e;
+            background-color: #0f1526;
+            color: white;
+            font-size: 16px;
+            text-align: center; /* Testo centrato dentro l'input */
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #e94560;
+        }
+
+        .btn-play {
+            width: 100%;
+            margin-top: 10px;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            background: #0f3460; /* Assicuro lo stile base se non caricato da style.css */
+            color: white;
+            border: none;
+            border-radius: 50px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn-play:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(15, 52, 96, 1);
+        }
+
+        .back-link {
+            margin-top: 20px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover { color: white; }
+        
+        .error-msg {
+            color: #ff4d4d;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none; /* Nascosto di default */
+        }
+    </style>
+</head>
+<body>
+    
+    <header style="width: 100%;">
+        <div class="logo">AimTrainer</div>
+        <nav><ul class="nav-links"><li><a href="index.php">Home</a></li></ul></nav>
+    </header>
+
+    <div class="edit-container">
+        
+        <h1>Crea Account</h1>
+        
+        <form action="registrazione.php" method="POST" id="regForm">
             
             <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
+                <label for="nome">NOME</label>
+                <input type="text" id="nome" name="nome" placeholder="Il tuo nome" required>
             </div>
 
             <div class="form-group">
-                <label for="cognome">Cognome:</label>
-                <input type="text" id="cognome" name="cognome" required>
+                <label for="cognome">COGNOME</label>
+                <input type="text" id="cognome" name="cognome" placeholder="Il tuo cognome" required>
             </div>
 
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required placeholder="tuamail@esempio.com">
+                <label for="email">EMAIL</label>
+                <input type="email" id="email" name="email" placeholder="tuamail@esempio.com" required>
             </div>
 
             <div class="form-group">
-                <label for="pwd">Password:</label>
+                <label for="pwd">PASSWORD</label>
                 <input type="password" id="pwd" name="password" required>
             </div>
 
             <div class="form-group">
-                <label for="pwd_confirm">Conferma Password:</label>
+                <label for="pwd_confirm">CONFERMA PASSWORD</label>
                 <input type="password" id="pwd_confirm" name="password_confirm" required>
             </div>
+            
+            <span id="passError" class="error-msg">Le password non coincidono!</span>
 
             <button type="submit" class="btn-play">REGISTRATI</button>
         </form>
-        
-        <p class="auth-footer">Hai gia' un account? <a href="login.html">Accedi qui</a></p>
-    </section>
-</main>
+
+        <a href="login.php" class="back-link">Hai già un account? Accedi qui</a>
+
+    </div>
+
+    <script>
+        document.getElementById('regForm').addEventListener('submit', function(e) {
+            var pwd = document.getElementById('pwd').value;
+            var pwdConfirm = document.getElementById('pwd_confirm').value;
+            var errorSpan = document.getElementById('passError');
+
+            if (pwd !== pwdConfirm) {
+                e.preventDefault(); // Blocca l'invio del form
+                errorSpan.style.display = 'block';
+                // Effetto visivo di errore
+                document.getElementById('pwd').style.borderColor = 'red';
+                document.getElementById('pwd_confirm').style.borderColor = 'red';
+            } else {
+                errorSpan.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
