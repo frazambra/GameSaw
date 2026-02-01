@@ -20,7 +20,7 @@ if ($is_logged_in) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AimTrainer - Home</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -47,10 +47,10 @@ if ($is_logged_in) {
                                 <?php echo $nome_utente; ?>
                             </div>
                             <hr>
-                            <a href="visualizza_profilo.php">Area utente</a>
+                            <a href="../utente/visualizza_profilo.php">Area utente</a>
                             <a href="#" style="color: red;">Cancella profilo</a>
                             <hr>
-                            <a href="logout.php">Logout</a>
+                            <a href="../autenticazione/logout.php">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -58,8 +58,8 @@ if ($is_logged_in) {
             <?php else: ?>
 
                 <div class="auth-buttons">
-                    <a href="login.php"><button id="btn-login" class="btn btn-outline">Login</button></a>
-                    <a href="registrazione.html"><button id="btn-register" class="btn btn-solid">Registrati</button></a>
+                    <a href="../autenticazione/login.php"><button id="btn-login" class="btn btn-outline">Login</button></a>
+                    <a href="../autenticazione/registrazione.html"><button id="btn-register" class="btn btn-solid">Registrati</button></a>
                 </div>
 
             <?php endif; ?>
@@ -89,6 +89,6 @@ if ($is_logged_in) {
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>

@@ -17,5 +17,5 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Ritorna alla home
-header("Location: Game.php");
+header("Location: ../home/Home.php");
 exit();

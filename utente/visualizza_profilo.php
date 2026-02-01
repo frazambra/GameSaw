@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once 'connessione_db.php';
+require_once '../connessione_db.php';
 
 // Se non è loggato, via
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: game.php");
+    header("Location: ../home/Home.php");
     exit();
 }
 
@@ -26,26 +26,13 @@ if (!$user) {
 <head>
     <meta charset="UTF-8">
     <title>Mio Profilo - AimTrainer</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .profile-card {
-            background: #16213e;
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid #e94560;
-            max-width: 600px;
-            margin: 50px auto;
-            color: white;
-        }
-        .info-box { margin-bottom: 20px; }
-        .label { color: #e94560; font-weight: bold; display: block; font-size: 0.9em; text-transform: uppercase; }
-        .value { font-size: 1.1em; }
-    </style>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_utente.css">
 </head>
 <body>
-    <header>
+    <header style="width: 100%">
         <div class="logo">AimTrainer</div>
-        <nav><ul class="nav-links"><li><a href="game.php">Home</a></li></ul></nav>
+        <nav><ul class="nav-links"><li><a href="../home/Home.php">Home</a></li></ul></nav>
     </header>
 
     <main>

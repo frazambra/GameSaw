@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connessione_db.php';
+require_once '../connessione_db.php';
 
 // Query per prendere i migliori 10 giocatori
 // Usiamo ORDER BY DESC per avere prima i punteggi alti
@@ -13,7 +13,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <title>Classifica Top 10 - GameSAW</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <style>
         /* Stile specifico per la tabella della classifica */
         .leaderboard-container {
@@ -75,7 +75,7 @@ $result = $conn->query($sql);
         <div class="logo">GameSAW</div>
         <nav>
             <ul class="nav-links">
-                <li><a href="game.php">Torna al Gioco</a></li>
+                <li><a href="Home.php">Torna al Gioco</a></li>
             </ul>
         </nav>
     </header>

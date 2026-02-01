@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accedi - AimTrainer</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
@@ -12,7 +12,7 @@
         <div class="logo">AimTrainer</div>
         <nav>
             <ul class="nav-links">
-                <li><a href="Game.php">Torna alla Home</a></li>
+                <li><a href="../home/Home.php">Torna alla Home</a></li>
             </ul>
         </nav>
     </header>
@@ -42,11 +42,11 @@
     </main>
 
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 
     <?php
  // 1. Includiamo la connessione al DB
-  require_once 'connessione_db.php';
+  require_once '../connessione_db.php';
 
   // 2. Avviamo la sessione (FONDAMENTALE per gestire il login)
  session_start();
@@ -81,7 +81,7 @@
             $_SESSION['logged_in'] = true;
 
             // Rimandiamo l'utente alla Home del gioco (o alla dashboard)
-            header("Location: Game.php");
+            header("Location: ../home/Home.php");
             exit();
 
         } else {

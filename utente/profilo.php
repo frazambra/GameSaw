@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once 'connessione_db.php';
+require_once '../connessione_db.php';
 
 // Se non è loggato, torna alla home
 if (!isset($_SESSION['logged_in'])) {
-    header("Location: game.php");
+    header("Location: ../home/Home.php");
     exit();
 }
 
@@ -43,102 +43,8 @@ $user = $result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <title>Modifica Profilo</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* RESET E STILE FORZATO PER QUESTA PAGINA */
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            align-items: center; /* Centra orizzontalmente tutto il body */
-        }
-
-        .edit-container {
-            background-color: #16213e; /* Sfondo scuro del box */
-            width: 100%;
-            max-width: 500px; /* Larghezza massima contenuta */
-            margin-top: 50px;
-            margin-bottom: 50px;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            text-align: center; /* Centra tutti i testi e elementi inline */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centra i div interni (flex items) */
-        }
-
-        h1 {
-            color: #e94560;
-            margin-bottom: 30px;
-            font-size: 28px;
-            text-transform: uppercase;
-            width: 100%;
-            border-bottom: 1px solid #1a1a2e;
-            padding-bottom: 15px;
-        }
-
-        /* Forza il form a stare in colonna e centrato */
-        form {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-            gap: 20px; /* Spazio tra i campi */
-        }
-
-        .form-group {
-            width: 100%;
-            text-align: left; /* Le etichette si leggono meglio a sinistra */
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #e94560;
-            font-weight: bold;
-            font-size: 0.9em;
-            text-align: center; /* OK, centro anche le etichette come richiesto */
-        }
-
-        /* Stile input per farli sembrare centrati e belli */
-        input[type="text"],
-        input[type="url"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 5px;
-            border: 1px solid #1a1a2e;
-            background-color: #0f1526;
-            color: white;
-            font-size: 16px;
-            text-align: center; /* Testo centrato dentro l'input */
-        }
-
-        input:disabled {
-            background-color: #1a1a2e;
-            color: #666;
-            border: 1px solid transparent;
-        }
-
-        .btn-play {
-            width: 100%; /* Bottone largo quanto il box */
-            margin-top: 10px;
-            padding: 15px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        .back-link {
-            margin-top: 20px;
-            color: #aaa;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .back-link:hover { color: white; }
-
-    </style>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_utente.css">
 </head>
 <body>
     

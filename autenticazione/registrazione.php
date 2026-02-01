@@ -2,7 +2,7 @@
 // api/register.php
 
 // 1. Includiamo la connessione
-require_once 'connessione_db.php';
+require_once '../connessione_db.php';
 
 // 2. Verifichiamo il metodo POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
