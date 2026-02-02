@@ -1,0 +1,148 @@
+
+
+/* Area input nickname */
+#user-area {
+    margin-bottom: 24px;
+    height: 50px; /* Altezza fissa per evitare salti di layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 80%;
+    text-align: center;
+}
+
+/* --- STILE MENU UTENTE --- */
+.user-menu-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative; /* Serve per posizionare la tendina */
+}
+
+.welcome-msg {
+    color: #fff;
+    font-size: 16px;
+}
+
+.profile-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Rende l'immagine tonda */
+    cursor: pointer;
+    border: 2px solid #e94560;
+    transition: transform 0.3s;
+}
+
+.profile-icon img:hover {
+    transform: scale(1.1);
+}
+
+/* Contenitore del Dropdown */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Il contenuto della tendina (nascosto di default) */
+.dropdown-content {
+    display: none; /* NASCOSTO */
+    position: absolute;
+    right: 0;
+    background-color: #16213e;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    border: 1px solid #e94560;
+}
+
+/* Link dentro la tendina */
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background-color: #e94560;
+}
+
+/* MOSTRA LA TENDINA QUANDO PASSI IL MOUSE SOPRA L'ICONA */
+/* Questo è il metodo CSS puro (Slide CSS) */
+.profile-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* --- Aggiunte per Game.php --- */
+
+/* Stile per il messaggio centrale di benvenuto */
+.welcome-center {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: normal;
+    animation: fadeIn 1s ease-in;
+}
+
+/* Stile per l'icona utente (FontAwesome) */
+.profile-icon {
+    cursor: pointer;
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Fix per il menu a tendina */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+    padding: 10px; /* Aumenta l'area cliccabile */
+}
+
+/* Mostra tendina all'hover */
+.profile-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%; /* Si apre sotto l'icona */
+    background-color: #16213e;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    z-index: 10;
+    border: 1px solid #e94560;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background-color: #e94560;
+}
+
+/* Animazione semplice */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

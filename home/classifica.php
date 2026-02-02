@@ -14,6 +14,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Classifica Top 10 - GameSAW</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_home.css">
     <style>
         /* Stile specifico per la tabella della classifica */
         .leaderboard-container {

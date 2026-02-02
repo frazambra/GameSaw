@@ -4,11 +4,32 @@
    ========================================== */
 session_start();
 
-$is_logged_in = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
+require_once '../connessione_db.php'; 
 
-// Prepariamo il nome utente se loggato
+$is_logged_in = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
+$ha_giocato = false; // Di base assumiamo che non abbia giocato
+
+// Prepariamo il nome utente e controlliamo se ha giocato
 if ($is_logged_in) {
     $nome_utente = htmlspecialchars($_SESSION['user_nome']);
+    
+    // MODIFICA: Recuperiamo l'ID e controlliamo il punteggio nel DB
+    if (isset($_SESSION['user_id'])) {
+        $user_id = $_SESSION['user_id'];
+
+        // Query per vedere se ha un punteggio > 0
+        $stmt = $conn->prepare("SELECT punteggio FROM utenti WHERE id = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($row = $result->fetch_assoc()) {
+            if ($row['punteggio'] > 0) {
+                $ha_giocato = true; // Ha giocato, quindi può recensire
+            }
+        }
+        $stmt->close();
+    }
 } else {
     $nome_utente = ""; 
 }
@@ -21,6 +42,7 @@ if ($is_logged_in) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AimTrainer - Home</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -32,6 +54,9 @@ if ($is_logged_in) {
             <ul class="nav-links">
                 <li><a href="info.html">Informazioni & Contatti</a></li>
                 <li><a href="classifica.php">🏆 Classifica</a></li>
+                <?php if ($ha_giocato): ?>
+                    <li><a href="recensioni.php">⭐ Lascia una Recensione</a></li>
+                <?php endif; ?>
             </ul>
 
             <?php if ($is_logged_in): ?>
@@ -78,12 +103,6 @@ if ($is_logged_in) {
 
             <h1 class="game-title">AimTrainer</h1>
             
-            <div id="user-area">
-                <?php if (!$is_logged_in): ?>
-                    <input type="text" id="nickname-input" placeholder="Inserisci il tuo Nickname" aria-label="Nickname">
-                <?php endif; ?>
-                
-                </div>
 
             <button id="btn-play" class="btn-play">GIOCA ORA</button>
         </div>

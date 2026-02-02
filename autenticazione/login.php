@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accedi - AimTrainer</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style_auth.css">
 </head>
 <body>
 

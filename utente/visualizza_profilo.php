@@ -40,8 +40,6 @@ if (!$user) {
             <div style="text-align: center;">
                 <h1>Il Mio Profilo</h1>
             </div>
-            
-            <hr style="border: 0.5px solid #1a1a2e; margin: 20px 0;">
 
             <div class="info-box">
                 <span class="label">Nome</span>
