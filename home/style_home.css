@@ -146,3 +146,88 @@ input[type="text"] {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* ... (codice esistente di style_home.css) ... */
+
+/* --- SEZIONE CLASSIFICA --- */
+.leaderboard-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #16213e;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Aggiunto per consistenza */
+}
+
+.leaderboard-container h1 {
+    color: #e94560;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* Stile dei bottoni Tab */
+.tabs-header {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background-color: #0f3460;
+    border: 2px solid #e94560;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.tab-btn:hover { 
+    background-color: #e94560; 
+}
+
+.tab-btn.active { 
+    background-color: #e94560; 
+    box-shadow: 0 0 10px #e94560; 
+}
+
+/* Tabelle (Specifiche per la classifica) */
+.leaderboard-container table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 10px; 
+}
+
+.leaderboard-container th, 
+.leaderboard-container td { 
+    padding: 15px; 
+    text-align: center; 
+    border-bottom: 1px solid #1a1a2e; 
+    color: white; 
+}
+
+.leaderboard-container th { 
+    background-color: #1a1a2e; 
+    color: #e94560; 
+    text-transform: uppercase;
+}
+
+.leaderboard-container tr:hover {
+    background-color: #0f3460;
+}
+
+/* Colori podio (Oro, Argento, Bronzo) */
+.leaderboard-container tbody tr:nth-child(1) td:first-child { color: #FFD700; font-weight: bold; font-size: 1.2em; }
+.leaderboard-container tbody tr:nth-child(2) td:first-child { color: #C0C0C0; font-weight: bold; font-size: 1.2em; }
+.leaderboard-container tbody tr:nth-child(3) td:first-child { color: #CD7F32; font-weight: bold; font-size: 1.2em; }
+
+.score-badge { 
+    background-color: #e94560; 
+    padding: 5px 10px; 
+    border-radius: 10px; 
+    font-weight: bold; 
+    color: white;
+}

@@ -2,78 +2,68 @@
 session_start();
 require_once '../connessione_db.php';
 
-// Query per prendere i migliori 10 giocatori
-// Usiamo ORDER BY DESC per avere prima i punteggi alti
-$sql = "SELECT nome, cognome, punteggio, livello FROM utenti ORDER BY punteggio DESC LIMIT 10";
-$result = $conn->query($sql);
+// 1. FACILE
+$sqlFacile = "SELECT nome, cognome, punteggio_facile as pt, livello FROM utenti WHERE punteggio_facile > 0 ORDER BY punteggio_facile DESC LIMIT 10";
+$resFacile = $conn->query($sqlFacile);
+
+// 2. NORMALE (usa colonna 'punteggio')
+$sqlNormale = "SELECT nome, cognome, punteggio as pt, livello FROM utenti WHERE punteggio > 0 ORDER BY punteggio DESC LIMIT 10";
+$resNormale = $conn->query($sqlNormale);
+
+// 3. DIFFICILE
+$sqlDifficile = "SELECT nome, cognome, punteggio_difficile as pt, livello FROM utenti WHERE punteggio_difficile > 0 ORDER BY punteggio_difficile DESC LIMIT 10";
+$resDifficile = $conn->query($sqlDifficile);
+
+function renderTable($result, $id, $isActive = false) {
+    $displayStyle = $isActive ? 'block' : 'none';
+    // Nota: Ho aggiunto tbody qui sotto per sicurezza HTML standard
+    echo "<div id='$id' class='ranking-tab' style='display: $displayStyle;'>";
+    echo "<table>
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Giocatore</th>
+                    <th>Liv</th>
+                    <th>Punti</th>
+                </tr>
+            </thead>
+            <tbody>";
+    
+    if ($result && $result->num_rows > 0) {
+        $rank = 1;
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>#" . $rank . "</td>";
+            
+            $cognome = isset($row['cognome']) ? $row['cognome'] : '';
+            $iniziale = strlen($cognome) > 0 ? $cognome[0] : '';
+            echo "<td>" . htmlspecialchars($row['nome']) . " " . htmlspecialchars($iniziale) . ".</td>";
+            
+            echo "<td>" . htmlspecialchars($row['livello']) . "</td>";
+            echo "<td><span class='score-badge'>" . $row['pt'] . "</span></td>";
+            echo "</tr>";
+            $rank++;
+        }
+    } else {
+        echo "<tr><td colspan='4'>Nessun record per questa difficoltà!</td></tr>";
+    }
+    
+    echo "</tbody></table></div>";
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Classifica Top 10 - GameSAW</title>
+    <title>Classifiche - GameSAW</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style_home.css">
-    <style>
-        /* Stile specifico per la tabella della classifica */
-        .leaderboard-container {
-            max-width: 800px;
-            margin: 40px auto;
-            background-color: #16213e;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-
-        h1 {
-            color: #e94560;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid #1a1a2e;
-        }
-
-        th {
-            background-color: #1a1a2e;
-            color: #e94560;
-            font-size: 1.1em;
-            text-transform: uppercase;
-        }
-
-        tr:hover {
-            background-color: #0f3460; /* Effetto hover sulle righe */
-        }
-
-        /* Colora d'oro, argento e bronzo i primi 3 posti */
-        tr:nth-child(1) td:first-child { color: #FFD700; font-weight: bold; font-size: 1.2em; } /* Oro */
-        tr:nth-child(2) td:first-child { color: #C0C0C0; font-weight: bold; font-size: 1.2em; } /* Argento */
-        tr:nth-child(3) td:first-child { color: #CD7F32; font-weight: bold; font-size: 1.2em; } /* Bronzo */
-
-        .score-badge {
-            background-color: #e94560;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">GameSAW</div>
+        <div class="logo">AimTrainer</div>
         <nav>
             <ul class="nav-links">
                 <li><a href="Home.php">Torna al Gioco</a></li>
@@ -84,48 +74,27 @@ $result = $conn->query($sql);
     <main>
         <div class="leaderboard-container">
             <h1>🏆 Top 10 Giocatori 🏆</h1>
-            <p>I migliori guerrieri di GameSAW</p>
+            
+            <div class="tabs-header">
+                <button class="tab-btn" onclick="openTab('tab-facile', this)">FACILE</button>
+                <button class="tab-btn active" onclick="openTab('tab-normale', this)">NORMALE</button>
+                <button class="tab-btn" onclick="openTab('tab-difficile', this)">DIFFICILE</button>
+            </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Posizione</th>
-                        <th>Giocatore</th>
-                        <th>Livello</th>
-                        <th>Punteggio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    if ($result->num_rows > 0) {
-                        $rank = 1;
-                        // Ciclo su ogni riga trovata dal database
-                        while($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            
-                            // Colonna Posizione (1°, 2°, 3°...)
-                            echo "<td>#" . $rank . "</td>";
-                            
-                            // Colonna Nome
-                            echo "<td>" . htmlspecialchars($row['nome']) . " " . htmlspecialchars($row['cognome'][0]) . ".</td>";
-                            
-                            // Colonna Livello
-                            echo "<td>" . htmlspecialchars($row['livello']) . "</td>";
-                            
-                            // Colonna Punteggio
-                            echo "<td><span class='score-badge'>" . $row['punteggio'] . "</span></td>";
-                            
-                            echo "</tr>";
-                            $rank++;
-                        }
-                    } else {
-                        echo "<tr><td colspan='4'>Ancora nessun giocatore in classifica!</td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
+            <?php renderTable($resFacile, 'tab-facile', false); ?>
+            <?php renderTable($resNormale, 'tab-normale', true); ?>
+            <?php renderTable($resDifficile, 'tab-difficile', false); ?>
+
         </div>
     </main>
 
+    <script>
+        function openTab(tabId, btnElement) {
+            document.querySelectorAll('.ranking-tab').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).style.display = 'block';
+            btnElement.classList.add('active');
+        }
+    </script>
 </body>
 </html>

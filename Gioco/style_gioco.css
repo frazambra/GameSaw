@@ -1,9 +1,12 @@
-/* Container per centrare il gioco */
+/* Container per centrare il gioco ed espanderlo */
 .game-wrapper {
-    max-width: 900px;
-    width: 95%;
-    margin: 30px auto;
+    width: 98%;           /* Occupa quasi tutta la larghezza */
+    max-width: none;      /* Rimuove il limite dei 900px */
+    margin: 10px auto;
     background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;         /* Altezza complessiva del container */
 }
 
 /* Header sopra l'arena (Nome e warning) */
@@ -11,8 +14,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
+    padding: 0 10px;
 }
 
 .guest-warning {
@@ -20,29 +24,64 @@
     color: orange;
 }
 
-/* Barra Punti e Tempo */
+/* Barra Controlli (Punti, Tempo e Difficoltà) */
 #hud-bar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between; /* Spazia elementi ai lati */
+    align-items: center;
     background-color: #16213e;
-    padding: 15px;
+    padding: 10px 20px;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 1.2em;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     color: white;
 }
 
-/* L'Arena di gioco */
+.hud-stats {
+    display: flex;
+    gap: 30px; /* Spazio tra Punti e Tempo */
+}
+
+/* Sezione Bottoni Difficoltà */
+.difficulty-selector {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-diff {
+    background-color: #0f3460;
+    border: 2px solid #e94560;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.btn-diff:hover {
+    background-color: #e94560;
+}
+
+/* Classe attiva per il bottone selezionato */
+.btn-diff.active {
+    background-color: #e94560;
+    box-shadow: 0 0 10px #e94560;
+    transform: scale(1.05);
+}
+
+/* L'Arena di gioco espansa */
 #aim-arena {
     position: relative;
     width: 100%;
-    height: 500px;
+    flex-grow: 1;        /* Occupa tutto lo spazio verticale rimanente */
+    min-height: 60vh;    /* Altezza minima garantita */
     background-color: #0f3460;
     border: 3px solid #e94560;
     border-radius: 15px;
-    overflow: hidden; /* Fondamentale: nasconde i bersagli se escono */
+    overflow: hidden; 
     cursor: crosshair;
     box-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
 }
@@ -89,19 +128,16 @@
     background-color: #ff5e78;
 }
 
-/* I Bersagli */
+/* I Bersagli - Dimensione gestita via JS ora, ma base CSS qui */
 .target {
     position: absolute;
-    width: 50px; 
-    height: 50px;
     background-color: #e94560;
     border-radius: 50%;
     box-shadow: 0 0 15px #e94560;
     cursor: pointer;
-    animation: popIn 0.2s ease-out;
+    animation: popIn 0.1s ease-out; /* Velocizzata un po' l'animazione */
 }
 
-/* Animazione comparsa */
 @keyframes popIn {
     from { transform: scale(0); }
     to { transform: scale(1); }

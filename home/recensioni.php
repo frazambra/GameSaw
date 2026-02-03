@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $can_review) {
 <body>
 
     <header>
-        <div class="logo">GameSAW</div>
+        <div class="logo">AimTrainer</div>
         <nav><ul class="nav-links"><li><a href="Home.php">Torna alla Home</a></li></ul></nav>
     </header>
 
