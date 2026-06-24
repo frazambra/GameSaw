@@ -1,8 +1,7 @@
 <?php
 session_start();
-require_once '../connessione_db.php'; // Controlla che il percorso sia giusto!
+require_once '../connessione_db.php';
 
-// 1. Controllo se l'utente è loggato
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: ../autenticazione/login.php");
     exit();
@@ -72,8 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $can_review) {
             
             <?php if ($can_review): ?>
                 
-                <p>Hai giocato e totalizzato <strong><?php echo $row['punteggio']; ?></strong> punti.</p>
-                <p>Facci sapere cosa ne pensi!</p>
+                <p>Ora che hai avuto un esperienza di gioco, facci sapere cosa ne pensi!</p>
 
                 <?php if($msg) echo "<p style='color:red'>$msg</p>"; ?>
 

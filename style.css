@@ -168,29 +168,7 @@ footer {
     }
 }
 
-/* --- Stili per i Form di Login e Registrazione --- */
-.auth-container {
-    max-width: 400px;
-    margin: 40px auto; /* Centra orizzontalmente */
-    text-align: left;
-    background-color: #16213e; /* Sfondo leggermente diverso dal body */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
 
-.auth-container h1 {
-    text-align: center;
-    font-size: 32px; /* px come richiesto */
-    margin-bottom: 10px;
-    color: #e94560;
-}
-
-.auth-container p {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #b0b0b0;
-}
 
 .rating-box {
     text-align: center;

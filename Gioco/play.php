@@ -72,4 +72,4 @@ if ($is_logged_in) {
     <script src="script_gioco.js"></script>
 
 </body>
-</html>
+</html><?php

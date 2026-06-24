@@ -73,7 +73,10 @@ if ($is_logged_in) {
                             </div>
                             <hr>
                             <a href="../utente/visualizza_profilo.php">Area utente</a>
-                            <a href="#" style="color: red;">Cancella profilo</a>
+                            <a href="../utente/elimina_account.php" style="color: red;" 
+                                onclick="return confirm('Sei sicuro di voler eliminare definitivamente il tuo profilo e tutti i tuoi punteggi? Questa azione non è reversibile.')">
+                                Cancella profilo
+                            </a>
                             <hr>
                             <a href="../autenticazione/logout.php">Logout</a>
                         </div>

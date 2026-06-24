@@ -1,0 +1,239 @@
+
+.admin-main {
+    display: block;
+    padding-top: 20px;
+    text-align: left;
+}
+
+.admin-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #16213e;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    border: 1px solid #2a2a4a;
+}
+
+.reviews-panel {
+    width: 95%;
+    max-width: 1200px;
+    margin: 20px auto 40px auto;
+    background: #0f1526;
+    padding: 25px 35px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    border: 1px solid #e94560;
+}
+
+
+.logo-subtitle {
+    color: #aaa;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.admin-nav-links {
+    align-items: center;
+}
+
+.logged-in-text {
+    color: #ccc;
+    font-size: 14px;
+}
+
+.btn-logout-override {
+    padding: 6px 15px;
+    font-size: 13px;
+}
+
+
+.admin-title {
+    color: #e94560;
+    border-bottom: 2px solid #0f1526;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.reviews-title {
+    font-size: 20px;
+    border-color: #2a2a4a;
+}
+
+.username-highlight {
+    color: #ffffff;
+}
+
+.alert-success {
+    background-color: rgba(78, 228, 78, 0.1);
+    color: #4ee44e;
+    border: 1px solid #4ee44e;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.admin-table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: white;
+}
+
+.admin-table th, 
+.admin-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid #2a2a4a;
+    vertical-align: middle;
+}
+
+.admin-table th {
+    background-color: #0f1526;
+    color: #e94560;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.admin-table th:first-child { border-top-left-radius: 10px; }
+.admin-table th:last-child { border-top-right-radius: 10px; }
+
+.admin-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+
+.text-muted {
+    color: #aaa;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-highlight {
+    color: #e94560;
+    font-weight: bold;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.text-small {
+    font-size: 13px;
+}
+
+.rating-col {
+    color: #ffd700;
+    font-weight: bold;
+}
+
+.review-comment-col {
+    max-width: 400px;
+    word-wrap: break-word;
+}
+
+.review-date-col {
+    font-size: 13px;
+    color: #aaa;
+}
+
+.no-data {
+    text-align: center;
+    color: #aaa;
+    padding: 30px;
+    font-style: italic;
+}
+
+/* --- BADGE E BOTTONI --- */
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.badge-active {
+    background-color: rgba(78, 228, 78, 0.1);
+    color: #4ee44e;
+    border: 1px solid #4ee44e;
+}
+
+.badge-banned {
+    background-color: rgba(255, 77, 77, 0.1);
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.action-buttons form {
+    margin: 0; 
+}
+
+.btn-action {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.btn-ban { background-color: #f39c12; }
+.btn-ban:hover { background-color: #d68910; }
+
+.btn-unban { background-color: #34495e; }
+.btn-unban:hover { background-color: #2c3e50; }
+
+.btn-delete { background-color: #e74c3c; }
+.btn-delete:hover { background-color: #c0392b; }
+
+.btn-view {
+    background-color: #0f3460;
+    border: 1px solid #e94560;
+}
+.btn-view:hover {
+    background-color: #e94560;
+}
+
+.btn-delete-review {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-close-panel {
+    background: #34495e;
+}
+.btn-close-panel:hover {
+    background: #2c3e50;
+}
+
+.close-panel-wrapper {
+    margin-top: 20px;
+    text-align: right;
+}

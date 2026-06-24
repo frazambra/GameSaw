@@ -142,3 +142,20 @@
     from { transform: scale(0); }
     to { transform: scale(1); }
 }
+
+.target.star {
+    background-color: #ffd700; /* Oro */
+    box-shadow: 0 0 15px #ffd700;
+    /* Forma a stella via CSS */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    border-radius: 0; 
+    animation: spinPop 0.5s ease-out; 
+    z-index: 100;
+    cursor: pointer;
+}
+
+/* Animazione di comparsa roteante */
+@keyframes spinPop {
+    0% { transform: scale(0) rotate(0deg); }
+    100% { transform: scale(1) rotate(360deg); }
+}/* Container per centrare il gioco ed espanderlo */

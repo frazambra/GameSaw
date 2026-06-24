@@ -8,49 +8,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const diffButtons = document.querySelectorAll('.btn-diff');
 
     let score = 0;
+    let starsCollected = 0; // Contatore stelle sessione corrente
     let timeLeft = 30;
     let gameInterval;
     let gameActive = false;
     
+    // Default size (Normale)
     let currentTargetSize = 50; 
 
     // GESTIONE DIFFICOLTÀ
     diffButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             if(gameActive) return;
-
             diffButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
             currentTargetSize = parseInt(btn.getAttribute('data-size'));
         });
     });
 
-    // START GAME
-    if (startBtn) {
-        startBtn.addEventListener('click', startGame);
-    }
+    if (startBtn) startBtn.addEventListener('click', startGame);
 
     function startGame() {
         score = 0;
+        starsCollected = 0;
         timeLeft = 30; 
         gameActive = true;
         
         scoreEl.textContent = score;
         timeEl.textContent = timeLeft;
         overlay.style.display = 'none'; 
-
         document.querySelectorAll('.target').forEach(t => t.remove());
-        
         spawnTarget();
 
         gameInterval = setInterval(() => {
             timeLeft--;
             timeEl.textContent = timeLeft;
-
-            if (timeLeft <= 0) {
-                endGame();
-            }
+            if (timeLeft <= 0) endGame();
         }, 1000);
     }
 
@@ -58,27 +51,58 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!gameActive) return;
 
         const target = document.createElement('div');
-        target.classList.add('target');
-
-        target.style.width = `${currentTargetSize}px`;
-        target.style.height = `${currentTargetSize}px`;
-
-        const maxX = arena.clientWidth - currentTargetSize;
-        const maxY = arena.clientHeight - currentTargetSize;
         
+        // 10% di possibilità che esca una STELLA invece di un cerchio
+        const isStar = Math.random() < 0.10; 
+
+        if (isStar) {
+            target.classList.add('target', 'star');
+            const starSize = 30; // La stella è piccola
+            target.style.width = `${starSize}px`;
+            target.style.height = `${starSize}px`;
+            
+            // La stella scompare da sola dopo 1.2 secondi se non la prendi!
+            const disappearTimer = setTimeout(() => {
+                if(target.parentNode) {
+                    target.remove();
+                    spawnTarget(); 
+                }
+            }, 1200);
+            
+            target.onmousedown = function(e) {
+                e.stopPropagation();
+                clearTimeout(disappearTimer); 
+                starsCollected++; // +1 Stella
+                score += 5;       // +5 Punti bonus
+                scoreEl.textContent = score;
+                this.remove();
+                spawnTarget();
+            };
+
+        } else {
+            // TARGET NORMALE
+            target.classList.add('target');
+            target.style.width = `${currentTargetSize}px`;
+            target.style.height = `${currentTargetSize}px`;
+
+            target.onmousedown = function(e) {
+                e.stopPropagation(); 
+                score++;
+                scoreEl.textContent = score;
+                this.remove(); 
+                spawnTarget(); 
+            };
+        }
+
+        // Posizione Casuale (sicura per i bordi)
+        const activeSize = isStar ? 30 : currentTargetSize;
+        const maxX = arena.clientWidth - activeSize;
+        const maxY = arena.clientHeight - activeSize;
         const randomX = Math.floor(Math.random() * maxX);
         const randomY = Math.floor(Math.random() * maxY);
 
         target.style.left = `${randomX}px`;
         target.style.top = `${randomY}px`;
-
-        target.onmousedown = function(e) {
-            e.stopPropagation(); 
-            score++;
-            scoreEl.textContent = score;
-            this.remove(); 
-            spawnTarget(); 
-        };
 
         arena.appendChild(target);
     }
@@ -87,15 +111,18 @@ document.addEventListener('DOMContentLoaded', () => {
         gameActive = false;
         clearInterval(gameInterval);
         
-        // MODIFICA QUI: Label cambiata
+        // Determina lo slug per il DB
         let diffName = 'Normale';
-        if(currentTargetSize === 80) diffName = 'Facile';
-        if(currentTargetSize === 25) diffName = 'Difficile';
+        let diffSlug = 'normale'; 
+        
+        if(currentTargetSize === 80) { diffName = 'Facile'; diffSlug = 'facile'; }
+        if(currentTargetSize === 25) { diffName = 'Difficile'; diffSlug = 'difficile'; }
 
         overlay.innerHTML = `
             <h2>Game Over!</h2>
             <p>Difficoltà: <strong>${diffName}</strong></p>
-            <p>Punteggio finale: <strong style="color: white;">${score}</strong></p>
+            <p>Punteggio: <strong>${score}</strong></p>
+            <p style="font-size: 0.9em; color: #ffd700;">Stelle Bonus: ${starsCollected}</p>
             <button id="btn-restart" class="btn-play-big">GIOCA ANCORA</button>
             <br><br>
             <a href="../home/Home.php" style="color: #ccc;">Torna alla Home</a>
@@ -105,31 +132,33 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('btn-restart').addEventListener('click', startGame);
 
         if (typeof USER_IS_LOGGED !== 'undefined' && USER_IS_LOGGED === true) {
-            saveScore(score, currentTargetSize);
+            // Inviamo Punteggio, Difficoltà e Stelle al server
+            saveScore(score, diffSlug, starsCollected);
         }
     }
 
-    async function saveScore(finalScore, size) {
-        // MODIFICA QUI: Slug cambiato
-        let difficoltaSlug = 'normale';
-        if(size === 80) difficoltaSlug = 'facile';
-        if(size === 25) difficoltaSlug = 'difficile';
-
+    async function saveScore(finalScore, diffSlug, stars) {
         try {
             const response = await fetch('salva_punteggio.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                     punteggio: finalScore,
-                    difficolta: difficoltaSlug 
+                    difficolta: diffSlug,
+                    stelle: stars 
                 })
             });
 
             const result = await response.json();
-            console.log("Salvataggio:", result.message);
+            
+            // Se il server ci risponde che abbiamo sbloccato badge
+            if (result.badges_unlocked && result.badges_unlocked.length > 0) {
+                let badgeMsg = result.badges_unlocked.join("\n- ");
+                alert("🏆 NUOVI BADGE SBLOCCATI!\n\n- " + badgeMsg);
+            }
             
         } catch (error) {
-            console.error("Errore connessione:", error);
+            console.error("Errore salvataggio:", error);
         }
     }
 });
